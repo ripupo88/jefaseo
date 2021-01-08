@@ -14,6 +14,7 @@ export const keywords = async (htmlgot = 'unknow') => {
 
     for (let i = 0; i < res.length; i++) {
         res[i] = res[i].normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        res[i] = res[i].normalize('NFD').replace(/[^\w\s]/gi, '');
         res[i] = res[i].toLowerCase();
     }
 
