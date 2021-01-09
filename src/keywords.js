@@ -3,6 +3,8 @@ var keyword_extractor = require('keyword-extractor');
 
 export const keywords = async (htmlgot = 'unknow') => {
     let sentence = htmlgot;
+    sentence = sentence.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    sentence = sentence.replace(/[^\w\s]/gi, '');
 
     //  Extract the keywords
     let res = keyword_extractor.extract(sentence, {
@@ -13,8 +15,6 @@ export const keywords = async (htmlgot = 'unknow') => {
     });
 
     for (let i = 0; i < res.length; i++) {
-        res[i] = res[i].normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        res[i] = res[i].normalize('NFD').replace(/[^\w\s]/gi, '');
         res[i] = res[i].toLowerCase();
     }
 
@@ -41,7 +41,7 @@ export const keywords = async (htmlgot = 'unknow') => {
     });
 
     const result = {
-        total: res.length,
+        total: sentence.split(' ').length,
         unicas: count.length,
         porcentaje: (100 * count[0].num) / res.length,
         lista: count,
