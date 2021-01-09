@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SunEditor, { buttonList } from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
-import { keywords } from './keywords';
+import { keywords } from './sample';
 
 const App = (props) => {
     const [seolist, setSeolist] = useState({ lista: [{ valor: '', num: 0 }] });
@@ -22,6 +22,7 @@ const App = (props) => {
                     .replace(/\s{2,}/g, ' ')
                     .replace(/&nbsp;/g, ' ')
             ).then((res) => {
+                console.log(res);
                 setSeolist(res);
             }); //Get Content Inside Editor
         }
